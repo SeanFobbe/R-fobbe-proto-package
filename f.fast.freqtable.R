@@ -30,9 +30,9 @@
 
 #'## Required Packages
 
-library(data.table)
-library(knitr)
-library(kableExtra)
+# library(data.table)
+# library(knitr)
+# library(kableExtra)
 
 
 #'## Function

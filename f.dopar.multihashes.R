@@ -15,7 +15,7 @@
 
 #'# Required Packages
 
-library(doParallel)
+# library(doParallel)
 
 #'# Requires system libraries
 

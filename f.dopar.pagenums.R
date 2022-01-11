@@ -11,8 +11,8 @@
 
 #'## Required Packages
 
-library(doParallel)
-library(pdftools)
+# library(doParallel)
+# library(pdftools)
 
 #'## Function
     

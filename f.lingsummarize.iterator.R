@@ -4,8 +4,8 @@
 #' During computation documents are ordered by number of characters (descending) to ensure that long documents are computed first. For corpora with a skewed document length distribution this is significantly faster. The variables "nchars" is also added to the original object.
 
 
-library(quanteda)
-library(doParallel)
+# library(quanteda)
+# library(doParallel)
 
 
 
