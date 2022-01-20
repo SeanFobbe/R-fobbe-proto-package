@@ -87,10 +87,10 @@ f.fast.freqtable <- function(x,
         if (output.csv == TRUE){
             
             fwrite(freqtable,
-                   paste0(outputdir,
-                          prefix,
-                          varname,
-                          ".csv"),
+                   file.path(outputdir,
+                             paste0(prefix,
+                                    varname,
+                                    ".csv")),
                    na = "NA")
 
         }
