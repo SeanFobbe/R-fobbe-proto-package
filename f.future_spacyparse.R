@@ -59,7 +59,7 @@ f.future_spacyparse <- function(x,
                  " ",
                  attributes(duration)$units,
                  ". Ended at ",
-                 end.dopar, "."))
+                 end, "."))
 
     spacy_finalize()
     
