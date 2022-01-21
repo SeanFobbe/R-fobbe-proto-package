@@ -7,7 +7,6 @@
 
 
 f.future_spacyparse <- function(x,
-                               threads = detectCores(),
                                chunksize = 1,
                                model = "en_core_web_sm",
                                pos = TRUE,
@@ -17,27 +16,29 @@ f.future_spacyparse <- function(x,
                                dependency = FALSE,
                                nounphrase = FALSE){
 
-    begin.dopar <- Sys.time()
+    begin <- Sys.time()
 
     spacy_initialize(model = model)
 
     
-    print(paste0("Parallel processing using ",
-                 threads,
-                 " threads. Begin at ",
-                 begin.dopar,
+    print(paste0("Begin at ",
+                 begin,
                  ". Processing ",
                  x[,.N],
                  " documents"))
 
+
     
-    cl <- makeForkCluster(threads)
-    registerDoParallel(cl)
-
-    itx <- iter(x,
-                by = "row",
-                chunksize = chunksize)
-
+    raw.list <- split(x, seq(nrow(x)))
+    
+    result.list <- future_lapply(raw.list,
+                                 f.lingsummarize,
+                                 future.seed = TRUE,
+                                 future.scheduling = chunksperworker,
+                                 future.chunk.size = chunksize)
+    
+    result.dt <- rbindlist(result.list)
+    
 
 
     result <- foreach(document = itx,
@@ -59,14 +60,14 @@ f.future_spacyparse <- function(x,
     txt.parsed <- rbindlist(result)
     
 
-    end.dopar <- Sys.time()
-    duration.dopar <- end.dopar - begin.dopar
+    end <- Sys.time()
+    duration <- end - begin
 
     print(paste0("Runtime was ",
-                 round(duration.dopar,
+                 round(duration,
                        digits = 2),
                  " ",
-                 attributes(duration.dopar)$units,
+                 attributes(duration)$units,
                  ". Ended at ",
                  end.dopar, "."))
 
