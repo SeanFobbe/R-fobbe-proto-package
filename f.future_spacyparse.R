@@ -32,32 +32,21 @@ f.future_spacyparse <- function(x,
     raw.list <- split(x, seq(nrow(x)))
     
     result.list <- future_lapply(raw.list,
-                                 f.lingsummarize,
+                                 spacy_parse,
                                  future.seed = TRUE,
                                  future.scheduling = chunksperworker,
-                                 future.chunk.size = chunksize)
+                                 future.chunk.size = chunksize,
+                                 pos = pos,
+                                 tag = tag,
+                                 lemma = lemma,
+                                 entity = entity,
+                                 dependency = dependency,
+                                 nounphrase = nounphrase,
+                                 multithread = FALSE)
     
     result.dt <- rbindlist(result.list)
     
-
-
-    result <- foreach(document = itx,
-                      .errorhandling = 'pass') %dopar% {
-                          
-                          out <- spacy_parse(document,
-                                             pos = pos,
-                                             tag = tag,
-                                             lemma = lemma,
-                                             entity = entity,
-                                             dependency = dependency,
-                                             nounphrase = nounphrase,
-                                             multithread = FALSE)
-
-                          return(out)}
-
-    stopCluster(cl)
-    
-    txt.parsed <- rbindlist(result)
+     
     
 
     end <- Sys.time()
@@ -73,7 +62,7 @@ f.future_spacyparse <- function(x,
 
     spacy_finalize()
     
-    return(txt.parsed)
+    return(result.dt)
 
 
 }
