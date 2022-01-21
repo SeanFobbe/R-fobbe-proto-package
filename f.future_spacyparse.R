@@ -7,14 +7,15 @@
 
 
 f.future_spacyparse <- function(x,
-                               chunksize = 1,
-                               model = "en_core_web_sm",
-                               pos = TRUE,
-                               tag = FALSE,
-                               lemma = FALSE,
-                               entity = FALSE,
-                               dependency = FALSE,
-                               nounphrase = FALSE){
+                                chunksperworker = 1,
+                                chunksize = NULL,
+                                model = "en_core_web_sm",
+                                pos = TRUE,
+                                tag = FALSE,
+                                lemma = FALSE,
+                                entity = FALSE,
+                                dependency = FALSE,
+                                nounphrase = FALSE){
 
     begin <- Sys.time()
 
