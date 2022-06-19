@@ -1,8 +1,8 @@
 
-#' @param command.name The name of the LaTeX command.
-#' @param command.body The body of the LaTeX command.
+#' @param command.name The name of the new LaTeX command.
+#' @param command.body The body of the new LaTeX command.
 #'
-#' @return A functional LaTeX command.
+#' @return A new LaTeX command.
 
 
 f.latexcommand <- function(command.name,
