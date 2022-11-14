@@ -3,7 +3,7 @@
 #' Downloads a large number of files with a wide range of options, including custom sleep times, custom retries, custom sleep during retries, timeout and a debug toggle for testing a reduced number of files. Will check the filenames in the destination folder to ensure that only files scheduled to be downloaded are present. Will skip already downloaded files.
 
 
-#' @param url Character. A vector of URLS.
+#' @param url Character. A vector of URLs. Will skip "NA" values.
 #' @param filename Character. A vector of filenames.
 #' @param dir Character. The destination directory. Will be created if not already present.
 #' @param sleep.min Positive Integer. Minimum number of seconds to randomly sleep between requests.
